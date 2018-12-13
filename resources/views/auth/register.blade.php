@@ -211,7 +211,7 @@
 
         $(document).ready(function () {
 
-            showSwal('success-message','Success','Your User Is Registered');
+            showSwal('success-message','Success','Your client Is Registered');
 
         });
         @endif

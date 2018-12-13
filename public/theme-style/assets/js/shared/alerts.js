@@ -54,8 +54,8 @@
       )
     } else if (type === 'warning-message-and-cancel') {
       swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: title,
+        text: text['text'],
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3f51b5',
@@ -66,14 +66,14 @@
             text: "Cancel",
             value: null,
             visible: true,
-            className: "btn btn-danger",
+            className: "btn btn-danger ",
             closeModal: true,
           },
           confirm: {
             text: "OK",
             value: true,
             visible: true,
-            className: "btn btn-primary",
+            className: "btn btn-primary ",
             closeModal: true
           }
         }

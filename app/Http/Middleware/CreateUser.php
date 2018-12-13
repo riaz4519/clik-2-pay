@@ -20,15 +20,23 @@ class CreateUser
 
         $have_access = false;
 
-        foreach (Auth::user()->role->accesses as $access) {
+        if(Auth::check()){
+            foreach (Auth::user()->role->accesses as $access) {
 
-            if ($access->access == 'Create User '){
+                if ($access->access == 'Create User'){
 
 
-                $have_access = true;
+                    $have_access = true;
+                }
+
             }
+        }else{
+
+            return redirect('login');
 
         }
+
+
 
         if ($have_access){
 

@@ -18,15 +18,24 @@ class ShowUsers
     {
         $have_access = false;
 
-        foreach (Auth::user()->role->accesses as $access) {
+        if (Auth::check()){
 
-            if ($access->access == 'show users'){
+            foreach (Auth::user()->role->accesses as $access) {
+
+                if ($access->access == 'show users'){
 
 
-                $have_access = true;
+                    $have_access = true;
+                }
+
             }
 
+
+        }else{
+
+            return redirect('/login');
         }
+
 
         if ($have_access){
 

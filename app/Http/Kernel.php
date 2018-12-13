@@ -3,7 +3,11 @@
 namespace App\Http;
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\CreateClient;
+use App\Http\Middleware\CreateInvoice;
 use App\Http\Middleware\CreateUser;
+use App\Http\Middleware\ShowAllClient;
+use App\Http\Middleware\ShowAllInvoice;
 use App\Http\Middleware\ShowUsers;
 use App\Http\Middleware\UserGroup;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -68,6 +72,10 @@ class Kernel extends HttpKernel
         'create_user' => CreateUser::class,
         'show_users' => ShowUsers::class,
         'user_group' => UserGroup::class,
+        'create_client' => CreateClient::class,
+        'show_all_client' => ShowAllClient::class,
+        'show_all_invoice' => ShowAllInvoice::class,
+        'create_invoice' => CreateInvoice::class,
     ];
 
     /**

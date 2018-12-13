@@ -13,34 +13,64 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success btn-sm btn-block">Create client
+                @if(Auth::user()->role->accesses->where('access','create client')->count() > 0)
+                <a href="{{ route('client.create') }}" class="btn btn-success btn-sm btn-block">Create client
                     <i class="mdi mdi-plus"></i>
-                </button>
+                </a>
+                    @endif
             </div>
         </li>
 
 
         <li class="nav-item">
-            <a class="nav-link" href="pages/samples/widgets.html">
-                <i class="menu-icon mdi mdi-file-document-box"></i>
+            <a class="nav-link" data-toggle="collapse" href="#dashboard-dropdown-invoice" aria-expanded="false" aria-controls="dashboard-dropdown-invoice">
+                <i class="menu-icon mdi mdi-buffer"></i>
                 <span class="menu-title">Invoice</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="dashboard-dropdown-invoice">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('invoice.index') }}">Invoice List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Pending Invoice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Paid Invoice</a>
+                    </li>
+
+                </ul>
+            </div>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="pages/samples/widgets.html">
-                <i class="menu-icon mdi mdi-account-multiple"></i>
+            <a class="nav-link" data-toggle="collapse" href="#dashboard-dropdown-clients" aria-expanded="false" aria-controls="dashboard-dropdown-clients">
+                <i class="menu-icon mdi mdi-account-group"></i>
                 <span class="menu-title">Clients</span>
+                <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="dashboard-dropdown-clients">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('client.create') }}">Create Client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('client.show') }}">All Client</a>
+                    </li>
+
+
+                </ul>
+            </div>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#dashboard-dropdown" aria-expanded="false" aria-controls="dashboard-dropdown">
+            <a class="nav-link" data-toggle="collapse" href="#dashboard-dropdown-users" aria-expanded="false" aria-controls="dashboard-dropdown-users">
                 <i class="menu-icon mdi mdi-account-star"></i>
                 <span class="menu-title">Users</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="dashboard-dropdown">
+            <div class="collapse" id="dashboard-dropdown-users">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('users.index') }}">All Users</a>
