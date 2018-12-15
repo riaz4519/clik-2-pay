@@ -20,7 +20,6 @@ class CreateInvoicesTable extends Migration
             $table->integer('status_id')->unsigned();
             $table->text('invoice_for');
             $table->string('amount');
-            $table->text('link');
             $table->text('url_short');
 
             $table->timestamps();

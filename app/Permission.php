@@ -14,4 +14,12 @@ class Permission extends Model
             'name'
 
         ];
+
+    public function accesses(){
+
+
+        return $this->hasMany('App\Access');
+
+
+    }
 }

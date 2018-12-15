@@ -19,4 +19,11 @@ class Client extends Model
             'post_code',
             'company'
         ];
+
+    public function invoices(){
+
+        return $this->hasMany('App\Invoice');
+
+    }
+
 }

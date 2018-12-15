@@ -22,4 +22,9 @@ class Access extends Model
 
     }
 
+    public function permission(){
+
+        return $this->belongsTo('App\Access');
+    }
+
 }

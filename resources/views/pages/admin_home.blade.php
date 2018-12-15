@@ -81,53 +81,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>53275531</td>
-                        <td>12 May 2017</td>
-                        <td>
-                            <label class="badge badge-danger">Pending</label>
-                        </td>
 
-                        <td>
-                            <a href="" class="btn btn-outline-success btn-sm">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Messsy</td>
-                        <td>53275532</td>
-                        <td>15 May 2017</td>
-                        <td>
-                            <label class="badge badge-warning">In progress</label>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-outline-success btn-sm">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>John</td>
-                        <td>53275533</td>
-                        <td>14 May 2017</td>
-                        <td>
-                            <label class="badge badge-info">Fixed</label>
-                        </td>
+                    @foreach($invoices as $invoice)
+                        <tr>
+                            <td>{{ $invoice->client->first_name.' '.$invoice->client->last_name }}</td>
+                            <td>{{ $invoice->user->name.' ('.$invoice->user->role->name.')' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($invoice->created_at)->format('d M , Y') }}</td>
+                            <td>
+                                <label class="badge badge-danger">{{ $invoice->status->status }}</label>
+                            </td>
 
-                        <td>
-                            <a href="" class="btn btn-outline-success btn-sm">View</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Peter</td>
-                        <td>53275534</td>
-                        <td>16 May 2017</td>
-                        <td>
-                            <label class="badge badge-success">Completed</label>
-                        </td>
+                            <td>
+                                <a href="" class="btn btn-outline-success btn-sm">View</a>
+                            </td>
+                        </tr>
+                        @endforeach
 
-                        <td>
-                            <a href="" class="btn btn-outline-success btn-sm">View</a>
-                        </td>
-                    </tr>
+
 
                     </tbody>
                 </table>

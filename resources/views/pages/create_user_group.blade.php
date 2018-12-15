@@ -19,7 +19,10 @@
                     <tr>
                         <th>Group name</th>
                         <th>Added Task.</th>
+
+                        @if(Auth::user()->role->accesses->where('access','edit user Group')->count() > 0)
                         <th>Action</th>
+                            @endif
 
                     </tr>
                     </thead>
@@ -32,7 +35,11 @@
                         </td>
                         @php($count = 0)
                         <td>@foreach($role->accesses as $access)@if($count % 3 == 0) <br class=""> @endif<label class="badge badge-info mt-2">{{ strtoupper($access->access) }}</label> @php($count++)  @endforeach</td>
-                        <td><a href="" class="btn btn-outline-info btn-sm"> Edit/view </a></td>
+
+                        @if(Auth::user()->role->accesses->where('access','edit user Group')->count() > 0)
+                            <td><a href="{{ route('user_group.edit',$role->id) }}" class="btn btn-outline-info btn-sm">Edit</a></td>
+
+                        @endif
 
                     </tr>
 
@@ -80,8 +87,6 @@
             </div>
         </div>
     </div>
-
-
 
     @endsection
 

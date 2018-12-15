@@ -1,8 +1,6 @@
 @extends('layout.index')
 
-
-@section('title','Show All Invoice')
-
+@section('title','Paid Section')
 
 @section('container')
 
@@ -40,7 +38,7 @@
                                     </td>
                                 </tr>
 
-                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -50,14 +48,11 @@
 
     </div>
 
-
-
-
-    @endsection
-
+@endsection
 
 @section('script')
 
     <script src="{{ asset('theme-style/assets/js/shared/data-table.js') }}"></script>
 
 @endsection
+

@@ -1,8 +1,6 @@
 @extends('layout.index')
 
-
-@section('title','Show All Invoice')
-
+@section('title','Pending Invoice')
 
 @section('container')
 
@@ -40,7 +38,7 @@
                                     </td>
                                 </tr>
 
-                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -50,11 +48,7 @@
 
     </div>
 
-
-
-
     @endsection
-
 
 @section('script')
 

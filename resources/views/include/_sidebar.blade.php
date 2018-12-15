@@ -34,10 +34,10 @@
                         <a class="nav-link" href="{{ route('invoice.index') }}">Invoice List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Pending Invoice</a>
+                        <a class="nav-link" href="{{ route('invoice.pending') }}">Pending Invoice</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Paid Invoice</a>
+                        <a class="nav-link" href="{{ route('invoice.paid') }}">Paid Invoice</a>
                     </li>
 
                 </ul>

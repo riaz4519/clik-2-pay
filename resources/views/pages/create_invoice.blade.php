@@ -11,13 +11,14 @@
             <div class="card-body">
 
 
-                <form class="tab-content tab-content-basic">
+                <form method="post" action="{{ route('invoice.store',$client->id) }}" class="tab-content tab-content-basic" id="invoice_form">
 
+                    {{ csrf_field() }}
                                 {{--handler id--}}
                                 <div class="form-group">
 
                                     <label>Handler Name</label>
-                                    <select class="form-control" name="user_id"  required>
+                                    <select class="form-control border border-danger handler_name" name="user_id"  required>
 
                                         <option></option>
 
@@ -40,7 +41,7 @@
                                 <div class="form-group">
 
                                     <label>Invoice For</label>
-                                    <input class="form-control" type="text" name="invoice_for" placeholder="insert deatails for payment" required/>
+                                    <input class="form-control invoice_for" type="text" name="invoice_for" placeholder="insert deatails for payment" required/>
 
                                 </div>
                                 {{--end invoice for--}}
@@ -51,7 +52,7 @@
                                     <div class="col">
 
                                         <label>Amount</label>
-                                        <input class="form-control" type="text" name="amount" placeholder="Insert Required Amount" required/>
+                                        <input class="form-control amount" type="text" name="amount" placeholder="Insert Required Amount" required/>
 
                                     </div>
 
@@ -83,32 +84,34 @@
 
                 <div class="modal-body">
                     <div class="card">
-                        <div class="d-flex justify-content-center">
 
-                            <i class="menu-icon alert alert-danger mdi mdi-check mdi-36px"></i>
-
+                        <div class="card-header text-center">
+                            Are You Sure!!
                         </div>
 
                         <div class="card-body">
 
 
-                            <table class="table">
+                            <table class="table table-bordered">
                                 <thead>
-                                <tr>
-                                    <th>Profile</th>
-                                    <th>VatNo.</th>
-                                    <th>Created</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
+
                                 <tbody>
                                 <tr>
-                                    <td>Jacob</td>
-                                    <td>53275531</td>
-                                    <td>12 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-danger">Pending</label>
-                                    </td>
+                                    <th>Name</th>
+                                    <td>{{ strtoupper($client->first_name.' '.$client->last_name) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Invoice  for</th>
+                                    <td class="invoice_for_table"></td>
+                                </tr>
+
+                                <tr>
+                                    <th>Handler Name:</th>
+                                    <td class="handler_name_table"></td>
+                                </tr>
+                                <tr>
+                                    <th>Amount</th>
+                                    <td class="amount_for_table"></td>
                                 </tr>
 
                                 </tbody>
@@ -120,7 +123,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-dismiss="modal">Create Invoice</button>
+                    <button type="button" class="btn btn-outline-success  invoice_submit_button" data-dismiss="modal">Create Invoice</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -137,6 +140,9 @@
 
 @section('script')
 
+    <script src="{{ asset('theme-style/assets/js/shared/alerts.js') }}"></script>
+    <script src="{{ asset('theme-style/assets/js/shared/avgrund.js') }}"></script>
+
 
     <script>
 
@@ -148,10 +154,73 @@
 
             $('.create_invoice_button').on('click',function () {
 
-                $('#create_invoice_modal').modal('show');
+
+                var handler_name = returnLenght($('.handler_name'));
+                var invoice_for = returnLenght($('.invoice_for'));
+                var amount = returnLenght($('.amount'));
+
+                if (handler_name  >  0 && invoice_for >0 && amount >0){
+
+
+                    $('.amount_for_table').text($('.amount').val());
+                    $('.invoice_for_table').text($('.invoice_for').val());
+                    $('.handler_name_table').text($('.handler_name').text());
+
+                    $('#create_invoice_modal').modal('show');
+
+                }else{
+
+
+                    if (handler_name == 0){
+
+                        $('.handler_name').addClass('bg bg-danger');
+
+
+                    }else{
+                        $('.handler_name').removeClass('bg bg-danger');
+                    }
+
+
+                    if (invoice_for == 0){
+
+                        $('.invoice_for').addClass('bg bg-danger');
+
+
+                    }else{
+                        $('.invoice_for').removeClass('bg bg-danger');
+                    }
+
+                    if (amount == 0){
+
+                        $('.amount').addClass('bg bg-danger');
+
+
+                    }else{
+                        $('.amount').removeClass('bg bg-danger');
+                    }
+
+
+                }
+
+
+
 
 
             });
+
+            $('.invoice_submit_button').on('click',function () {
+
+                $('#invoice_form').submit();
+
+
+            });
+
+            function returnLenght($string) {
+
+
+                return $string.val().length;
+
+            }
 
 
 
@@ -160,5 +229,21 @@
 
     </script>
 
+    <script>
+
+
+        @if(Session::has('message'))
+
+        $(document).ready(function () {
+
+            showSwal('success-message','Invoice','Invoice created Successfully');
+
+
+        });
+        @endif
+
+    </script>
+
     @endsection
+
 
