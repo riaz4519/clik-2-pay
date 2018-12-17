@@ -26,6 +26,15 @@ Route::get('/', function () {
 
     Route::get('/invoice/pending','InvoiceController@pending')->name('invoice.pending')->middleware('show_all_invoice');
 
+
+
+
+
+    Route::post('/invoice/delete/{invoice_id}','InvoiceController@delete')->name('invoice.delete');
+    Route::post('/invoice/edit/{invoice_id}','InvoiceController@update')->name('invoice.update');
+
+    Route::get('/invoice/edit/{invoice_id}','InvoiceController@edit')->name('invoice.edit')->middleware('edit_invoice');
+
     Route::post('/invoice/create/{client_id}','InvoiceController@store')->name('invoice.store');
 
     Route::get('/invoice/create/{client_id}','InvoiceController@create')->name('invoice.create')->middleware('create_invoice');
@@ -57,6 +66,7 @@ Route::get('/', function () {
 
 Route::get('/users','UsersController@index')->name('users.index');
 
+Route::get('/rm','RmController@index')->name('rm.index');
 Route::get('/admin','AdminController@index')->name('admin.index');
 
 Auth::routes();

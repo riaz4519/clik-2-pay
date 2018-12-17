@@ -9,6 +9,7 @@ use App\Status;
 use Illuminate\Contracts\Session\Session;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
@@ -71,7 +72,22 @@ class InvoiceController extends Controller
 
     public function pending(){
 
-        $pending_invoice = Status::find(1)->invoices;
+
+
+
+        $use_role = Auth::user()->role->name;
+
+        if ($use_role == 'admin' || $use_role == 'accountant'){
+
+            $pending_invoice = Status::find(1)->invoices;
+
+        }else{
+
+            $pending_invoice = User::find(Auth::user()->id)->invoices->where('status_id',1);
+
+
+        }
+
 
         return view('pages.pending_invoice')->with(['invoices'=>$pending_invoice]);
 
@@ -80,9 +96,69 @@ class InvoiceController extends Controller
 
     public function paid(){
 
-        $paid_invoice = Status::find(2)->invoices;
+        $use_role = Auth::user()->role->name;
+
+        if ($use_role == 'admin' || $use_role == 'accountant'){
+            $paid_invoice = Status::find(2)->invoices;
+        }else{
+
+            $paid_invoice = User::find(Auth::user()->id)->invoices->where('status_id',2);
+
+
+        }
 
         return view('pages.pending_invoice')->with(['invoices'=>$paid_invoice]);
+
+    }
+
+    public function edit($invoice_id){
+
+
+        $user_by_role = Role::all()->where('name','!=','admin')->where('name','!=','accountant');
+
+        $invoice = Invoice::find($invoice_id);
+
+
+
+        return view('pages.edit_invoice')->with(['roles'=>$user_by_role,'invoice'=>$invoice]);
+    }
+    public function update(Request $request,$invoice_id){
+
+        $this->validate($request,
+
+            [
+                'user_id' => 'required',
+                'invoice_for' => 'required',
+                'amount'    => 'required'
+            ]
+        );
+
+
+        $update =
+            [
+                'user_id' =>$request->get('user_id'),
+                'invoice_for' => $request->get('invoice_for'),
+                'amount'    => $request->get('amount'),
+            ];
+
+        $invoice = Invoice::find($invoice_id);
+
+        $invoice->update($update);
+
+        \Session::flash('message','Success');
+
+        return redirect()->back();
+
+    }
+
+    public function delete(Request $request,$invoice_id){
+
+
+        $invoice = Invoice::find($invoice_id);
+
+        $invoice->delete();
+
+        echo 'deleted';
 
     }
 

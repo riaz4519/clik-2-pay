@@ -20,6 +20,10 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check() && Auth::user()->role->name == 'admin') {
             return redirect('/admin');
         }
+        else if (Auth::guard($guard)->check() && Auth::user()->role->name == 'rm'){
+            return redirect('/rm');
+
+        }
 
         return $next($request);
     }
