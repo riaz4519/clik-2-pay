@@ -7,7 +7,7 @@
 
 @section('container')
 
-    <div class="col-md-4 col-sm-12 grid-margin stretch-card">
+    <div class="col-md-3 col-sm-12 grid-margin stretch-card">
         <div class="card card-statistics bg-green-gradient">
             <div class="card-body">
                 <div class="clearfix">
@@ -17,16 +17,16 @@
                     <div class="float-right">
                         <p class="mb-0 text-right">Total invoice</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">BDT 65,650</h3>
+                            <h3 class="font-weight-medium text-right mb-0">BDT {{ number_format($invoice->sum('amount') )}}</h3>
                         </div>
                     </div>
                 </div>
                 <p class="mt-3 mb-0">
-                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth </p>
+                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>Total Invoice value </p>
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 grid-margin stretch-card">
+    <div class="col-md-3 col-sm-12 grid-margin stretch-card">
         <div class="card card-statistics bg-orange-gradient">
             <div class="card-body">
                 <div class="clearfix">
@@ -36,7 +36,7 @@
                     <div class="float-right">
                         <p class="mb-0 text-right">Due</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">BDT 3455</h3>
+                            <h3 class="font-weight-medium text-right mb-0">BDT {{number_format($invoice->where('status_id','1')->sum('amount')) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 grid-margin stretch-card">
+    <div class="col-md-3 col-sm-12 grid-margin stretch-card">
         <div class="card card-statistics bg-blue-gradient">
             <div class="card-body">
                 <div class="clearfix">
@@ -55,7 +55,7 @@
                     <div class="float-right">
                         <p class="mb-0 text-right">Collected</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">5693</h3>
+                            <h3 class="font-weight-medium text-right mb-0">BDT {{number_format($invoice->where('status_id','2')->sum('amount')) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,26 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-sm-12 grid-margin stretch-card">
+    <div class="col-md-3 col-sm-12 grid-margin stretch-card">
+        <div class="card card-statistics bg-green-gradient">
+            <div class="card-body">
+                <div class="clearfix">
+                    <div class="float-left">
+                        <i class="mdi mdi-cube icon-lg"></i>
+                    </div>
+                    <div class="float-right">
+                        <p class="mb-0 text-right">Invoice</p>
+                        <div class="fluid-container">
+                            <h3 class="font-weight-medium text-right mb-0">{{ number_format($invoice->count() )}}</h3>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0">
+                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Total Number of Invoice </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-12 grid-margin stretch-card">
 
         <div class="card">
             <div class="card-body">
@@ -92,7 +111,7 @@
                             </td>
 
                             <td>
-                                <a href="" class="btn btn-outline-success btn-sm">View</a>
+                                <a href="{{ url('/'.$invoice->url_short) }}" class="btn btn-outline-success btn-sm">View</a>
                             </td>
                         </tr>
                         @endforeach
@@ -106,7 +125,7 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-12 grid-margin stretch-card">
+    <div class="col-md-3 col-sm-12 grid-margin stretch-card">
 
 
 
@@ -122,7 +141,7 @@
                             <div class="float-right">
                                 <p class="mb-0 text-right">Todays income</p>
                                 <div class="fluid-container">
-                                    <h3 class="font-weight-medium text-right mb-0">BDT 65,650</h3>
+                                    <h3 class="font-weight-medium text-right mb-0">BDT {{ number_format($invoice->whereDate('updated_at',\Carbon\Carbon::today())->where('status_id',2)->sum('amount')) }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -139,9 +158,9 @@
                                 <i class="mdi mdi-file-document-box icon-lg"></i>
                             </div>
                             <div class="float-right">
-                                <p class="mb-0 text-right">Today invoice Generated</p>
+                                <p class="mb-0 text-right">Generated Today</p>
                                 <div class="fluid-container">
-                                    <h3 class="font-weight-medium text-right mb-0">10</h3>
+                                    <h3 class="font-weight-medium text-right mb-0">{{ $generated_today }}</h3>
                                 </div>
                             </div>
                         </div>

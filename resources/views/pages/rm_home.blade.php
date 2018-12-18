@@ -1,6 +1,6 @@
 @extends('layout.index')
 
-@section('title','Rm | Dashboard')
+@section('title', ucwords(Auth::user()->role->name).' | Dashboard')
 
 
 @section('container')
@@ -54,7 +54,7 @@
                     <div class="float-right">
                         <p class="mb-0 text-right">Collected</p>
                         <div class="fluid-container">
-                            <h3 class="font-weight-medium text-right mb-0">5693</h3>
+                            <h3 class="font-weight-medium text-right mb-0"> BDT {{number_format($invoice->where('status_id','2')->sum('amount')) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                             </td>
 
                             <td>
-                                <a href="" class="btn btn-outline-success btn-sm">View</a>
+                                <a href="{{ url('/'.$single_invoice->url_short) }}" class="btn btn-outline-success btn-sm">View</a>
                             </td>
                         </tr>
                     @endforeach

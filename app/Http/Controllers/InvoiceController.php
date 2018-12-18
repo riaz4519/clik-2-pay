@@ -17,7 +17,18 @@ class InvoiceController extends Controller
 
     public function index(){
 
-        $invoices = Invoice::all();
+        $use_role = Auth::user()->role->name;
+
+        if ($use_role == 'admin' || $use_role == 'accountant'){
+
+            $invoices = Invoice::all();
+
+        }else{
+
+            $invoices = User::find(Auth::user()->id)->invoices;
+
+
+        }
 
 
         return view('pages.show_all_invoice')->with(['invoices'=>$invoices]);

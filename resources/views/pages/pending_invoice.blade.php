@@ -34,7 +34,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="" class="btn btn-outline-success btn-sm">View</a>
+                                        <a href="{{ url('/'.$invoice->url_short) }}" class="btn btn-outline-success btn-sm">View</a>
                                     </td>
                                 </tr>
 

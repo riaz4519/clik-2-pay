@@ -13,9 +13,14 @@ class ClientViewController extends Controller
 
         $invoice = Invoice::where('url_short',$url_short)->first();
 
+        if ($invoice){
+            return view('pages.client_view_page')->with(['invoice'=>$invoice]);
+        }
+
+        return abort(404);
 
 
-        return view('pages.client_view_page')->with(['invoice'=>$invoice]);
+
 
     }
 

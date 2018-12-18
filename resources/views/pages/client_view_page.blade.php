@@ -17,7 +17,7 @@
                     <h4 class="">{{ ucwords($invoice->client->first_name .' '. $invoice->client->last_name) }}</h4>
                     <p class="text-dark btn {{ $invoice->status->status == 'pending'? 'btn-danger':'btn-success'}}">{{ ucwords($invoice->status->status) }}</p>
                     <p class="mt-4 card-title  text-justify">Dear {{ ucwords($invoice->client->first_name .' '. $invoice->client->last_name) }},<br>
-                        has requested an amount of <span class="text-dark ">{{ number_format($invoice->amount) }}</span> BDT on behalf of the Global Consultants Ltd to continue
+                       {{ ucwords($invoice->user->name) }} has requested an amount of <span class="text-dark ">{{ number_format($invoice->amount) }}</span> BDT on behalf of the Global Consultants Ltd to continue
                         your process of application for {{ $invoice->invoice_for }}.
                     </p>
 

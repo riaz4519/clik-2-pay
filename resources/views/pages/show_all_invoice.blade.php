@@ -45,7 +45,12 @@
                                     </td>
 
                                     <td>
+
+                                        <a href="{{ url('/'.$invoice->url_short) }}" class="btn btn-outline-success btn-sm">View</a>
+
+                                        @if($invoice->status->status != 'paid')
                                         <a href="" class="btn btn-outline-info btn-sm">Message</a>
+                                        @endif
 
                                         @if($invoice->status->status =='pending')
 
