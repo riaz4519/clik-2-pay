@@ -66,9 +66,29 @@ Route::get('/', function () {
 
 Route::get('/users','UsersController@index')->name('users.index');
 
-Route::get('/rm','RmController@index')->name('rm.index');
-Route::get('/admin','AdminController@index')->name('admin.index');
+Route::get('/users/{user_role}','NormalUserController@index')->name('normal.user.index');
+
+Route::get('/system/admin','AdminController@index')->name('admin.index');
+
+
 
 Auth::routes();
+
+
+/*area for client*/
+
+
+Route::get('/pay', 'PublicSslCommerzPaymentController@index');
+Route::POST('/success', 'PublicSslCommerzPaymentController@success');
+Route::POST('/fail', 'PublicSslCommerzPaymentController@fail');
+Route::POST('/cancel', 'PublicSslCommerzPaymentController@cancel');
+Route::POST('/ipn', 'PublicSslCommerzPaymentController@ipn');
+
+
+Route::get('/{url_short}','ClientViewController@index');
+
+
+/*end area for client*/
+
 
 

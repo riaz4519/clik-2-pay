@@ -8,6 +8,7 @@ use App\Http\Middleware\CreateInvoice;
 use App\Http\Middleware\CreateUser;
 use App\Http\Middleware\EditInvoice;
 use App\Http\Middleware\EditUserGroup;
+use App\Http\Middleware\NormalUsers;
 use App\Http\Middleware\ShowAllClient;
 use App\Http\Middleware\ShowAllInvoice;
 use App\Http\Middleware\ShowUsers;
@@ -80,6 +81,7 @@ class Kernel extends HttpKernel
         'create_invoice' => CreateInvoice::class,
         'edit_user_group'   => EditUserGroup::class,
         'edit_invoice' =>EditInvoice::class,
+        'normal_users' => NormalUsers::class,
     ];
 
     /**

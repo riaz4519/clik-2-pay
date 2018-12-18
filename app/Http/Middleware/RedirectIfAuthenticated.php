@@ -17,11 +17,17 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && Auth::user()->role->name == 'admin') {
+
+        $user_role = Auth::user()->role->name;
+        if (Auth::guard($guard)->check() && $user_role == 'admin') {
             return redirect('/admin');
         }
-        else if (Auth::guard($guard)->check() && Auth::user()->role->name == 'rm'){
-            return redirect('/rm');
+        else if (Auth::guard($guard)->check() && $user_role== 'accountant'){
+
+            return redirect('/accountant');
+        }
+        else if (Auth::guard($guard)->check() ){
+            return redirect('/users/'.$user_role);
 
         }
 
